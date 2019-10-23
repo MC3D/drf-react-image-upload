@@ -19,8 +19,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('api/v1/', include('api.urls')),
     path('admin/', admin.site.urls),
+    path('api/v1/', include('api.urls')),
+    path('auth-api', include('rest_framework.urls')),
+    path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('api/v1/rest-auth/', include('rest_auth.urls')),
+    # react url patterns
+    path('boards/new/', include('frontend.urls')),
     path('', include('frontend.urls')),
 ]
 

@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import './App.css';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-class App extends Component {
+class RecipeForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       caption: '',
       image: null,
-      preview: ''
+      preview: '',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,33 +40,34 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let form_data = new FormData();
+    let formData = new FormData();
 
-    form_data.append('caption', this.state.caption);
-    form_data.append('image', this.state.image);
+    formData.append('caption', this.state.caption);
+    formData.append('image', this.state.image);
 
-    axios.post('/api/v1/boards/', form_data, {
+    axios.post('/api/v1/boards/', formData, {
       headers: {
         'content-type': 'multipart/form-data'
       }
     })
     .then(res => {
-        console.log(res);
+        // console.log(res);
+        let images = [...this.state.images];
+        images.push(res.data);
+        this.setState({images});
     })
     .catch(error => {
         console.log(error);
     });
-  }
 
-  componentDidMount() {
-     axios.get(`/api/v1/boards/`)
-     .then(res => {
-         console.log(res);
-     })
-     .catch(error => {
-         console.log(error);
-     });
-   }
+    // axios.patch('/api/v1/boards/1/', {caption:'Hello, Bill!'})
+    // .then(res => {
+    //     console.log(res);
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+  }
 
   render() {
     return  (
@@ -85,4 +85,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default RecipeForm;

@@ -39,14 +39,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # new
 
     # 3rd party
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'allauth', # new
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'rest_auth.registration', # new
 
     # local
     'boards.apps.BoardsConfig',
     'frontend.apps.FrontendConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -155,3 +173,9 @@ AWS_DEFAULT_ACL = None
 # # default will be to lock down
 AWS_S3_FILE_OVERWRITE = False
 # true is defult and will overwrite file names. Set to FALSE for files to upload and add numbers to the end of file to add repeats.
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+
+# https://docs.djangoproject.com/en/2.2/ref/contrib/sites/
+# The SITE_ID setting specifies the database ID of the Site object associated with that particular settings file.
+SITE_ID = 1 # new
