@@ -70,6 +70,7 @@ class RecipeForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     return  (
       <form onSubmit={this.handleSubmit}>
         <input type='text' name='caption' value={this.state.caption} onChange={this.handleChange}/>
