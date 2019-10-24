@@ -24,7 +24,9 @@ class Login extends Component {
 
     axios.post('/api/v1/rest-auth/login/', this.state)
     .then(res => {
-        localStorage.setItem('my-app-token', res.data.token);
+        console.log('res', res.data)
+        localStorage.setItem('my-app-user', JSON.stringify(res.data)
+      );
         this.props.history.push('/')
     })
     .catch(error => {

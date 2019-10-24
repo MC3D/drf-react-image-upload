@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -26,6 +26,12 @@ class BoardRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+# class BoardViewSet(viewsets.ModelViewSet):
+#     permission_classes = (IsOwnerOrReadOnly,)
+#     queryset = Board.objects.all()
+#     serializer_class = BoardSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
