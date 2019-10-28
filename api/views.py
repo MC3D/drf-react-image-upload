@@ -8,8 +8,6 @@ from .serializers import BoardSerializer
 from boards.models import Board
 
 
-
-
 class BoardListCreateAPIView(generics.ListCreateAPIView):
     # permission_classes = (permissions.IsAuthenticated,)
     queryset = Board.objects.all()

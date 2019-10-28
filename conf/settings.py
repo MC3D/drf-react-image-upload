@@ -26,7 +26,11 @@ SECRET_KEY = 'b5@7ovs+#$313jgb2vo*182&!+q$jtm86p&hc#b1$*$_hr9k*n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'app-name.herokuapp.com',
+    'localhost',
+]
 
 
 # Application definition
@@ -51,6 +55,7 @@ INSTALLED_APPS = [
     'rest_auth.registration', # new
 
     # local
+    'api.apps.ApiConfig',
     'boards.apps.BoardsConfig',
     'frontend.apps.FrontendConfig',
 ]
